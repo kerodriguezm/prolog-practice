@@ -4,6 +4,19 @@ Este documento contiene las consultas y resultados solicitados en los puntos **2
 
 ---
 
+
+## 📌 Cómo ejecutar las consultas en Prolog
+
+1. Guarda el archivo con los hechos y reglas como `familiares.pl`.  
+2. Abre el intérprete de Prolog:
+   ```bash
+   swipl
+
+**Carga el archivo**
+```prolog
+?- consult('familiares.pl').
+```
+
 ## 2.2 Consultas básicas
 
 ### a) ¿Eduardo y Alicia son hermanos?
