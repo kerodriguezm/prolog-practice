@@ -223,3 +223,168 @@ true.
 ✅ Beatriz es sobrina de Eduardo.
 
 ---
+
+## 3.1 aprobar un examen
+
+**Definiciones:**
+```prolog
+% Archivo: aprexamen.pl
+% Predicados
+aprueba_examen(X) :- preparado_para_examen(X).
+aprueba_examen(X) :- persona(X),examen_facil.
+preparado_para_examen(X) :- sabe_todo(X).
+preparado_para_examen(X) :- asiste_a_clases(X), realiza_ejercicios(X),
+lee_libro(X).
+preparado_para_examen(X) :- preparado_para_examen(Y),tutor(Y,X).
+% Proposiciones
+persona(maria).
+persona(alfredo).
+persona(tomas).
+persona(susana).
+persona(juan).
+lee_libro(alfredo).
+lee_libro(maria).
+
+asiste_a_clases(alfredo).
+asiste_a_clases(maria).
+realiza_ejercicios(alfredo).
+realiza_ejercicios(maria).
+sabe_todo(tomas).
+tutor(maria,juan).
+tutor(juan,susana).
+```
+
+---
+
+### a) ¿Aprueba el examen Juan?
+
+**Consulta:**
+```prolog
+?- aprueba_examen(juan).
+```
+**Resultado:**
+```
+true.
+```
+✅ Juan aprueba el examen.
+---
+
+### b) ¿Está Susana preparada para el examen?
+
+**Consulta:**
+```prolog
+?- preparado_para_examen(susana).
+```
+**Resultado:**
+```
+true.
+```
+✅ Susana esta preparada para el examen.
+---
+
+### c) ¿Quién es el sabio del grupo?
+
+**Consulta:**
+```prolog
+?- sabe_todo(X).
+```
+**Resultado:**
+```
+X = tomas.
+```
+✅ Tomas es el sabio del grupo.
+---
+
+### d) ¿Quiénes aprueban el examen?
+
+**Consulta:**
+```prolog
+?- aprueba_examen(X).
+```
+**Resultado:**
+```
+X = tomas ;
+X = alfredo ;
+X = maria ;
+X = juan ;
+X = susana.
+```
+✅ La lista anterior muestra quienes aprobaran el examen.
+---
+
+### d) ¿Quiénes aprueban el examen?
+
+**Consulta:**
+```prolog
+?- aprueba_examen(X).
+```
+**Resultado:**
+```
+X = tomas ;
+X = alfredo ;
+X = maria ;
+X = juan ;
+X = susana.
+```
+✅ La lista anterior muestra quienes aprobaran el examen.
+---
+
+### 4.1) Escribe un programa en Prolog que use esta base de conocimiento y muestre que SOPORTA(libro,taza) es verdadero
+
+1. Si X está encima de Y, entonces Y soporta a X.
+2. Si X está arriba de Y y se tocan una y otra, entonces X está encima de Y.
+3. La taza está arriba del libro.
+4. La taza toca al libro.
+
+**Programa:**
+```prolog
+% Hechos
+arriba_de(taza, libro).
+se_tocan(taza, libro).
+% Reglas
+soporta(Y, X) :- encima_de(X, Y).
+encima_de(X, Y) :- arriba_de(X, Y), se_tocan(X, Y).
+```
+
+---
+### 4.2) SOPORTA(libro,taza)
+
+**Consulta:**
+```prolog
+?- soporta(libro, taza).
+```
+**Resultado:**
+```
+true.
+```
+✅  La regla cumple con lo consultado
+---
+
+### 4.3) Convierte a Prolog la pregunta: ¿Qué soporta a la taza?
+
+**Consulta:**
+```prolog
+?- soporta(Y, taza).
+```
+**Resultado:**
+```
+Y = libro.
+```
+
+---
+
+### 4.4) Convierte a Prolog la pregunta: “¿Qué está encima del libro?”
+
+**Consulta:**
+```prolog
+?- encima_de(X, libro).
+```
+**Resultado:**
+```
+X = taza.
+```
+---
+
+### 5) Convierte a Prolog la pregunta: “¿Qué está encima del libro?”
+
+El análisis de las consultas demostró la importancia de la precisión en la sintaxis y la estructura lógica, ya que un pequeño error puede alterar completamente los resultados del razonamiento. Además, se reforzó la comprensión sobre la forma en que Prolog utiliza la recursividad y el encadenamiento hacia atrás para llegar a conclusiones a partir de un conjunto finito de hechos.
